@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnxlbprvywja1"]
+
+[ext_resource type="PackedScene" uid="uid://o0witael17gv" path="res://ball/ball.tscn" id="1_6n3gy"]
+[ext_resource type="PackedScene" uid="uid://n33r8h08yu1m" path="res://levels/wall.tscn" id="2_pdfg5"]
+[ext_resource type="PackedScene" uid="uid://dv3bek2be5a2i" path="res://blue_paddle/blue_paddle.tscn" id="3_v1fj0"]
+
+[node name="test_level" type="Node2D"]
+position = Vector2(1, 0)
+
+[node name="ball" parent="." instance=ExtResource("1_6n3gy")]
+position = Vector2(505, 321)
+
+[node name="Node" type="Node" parent="."]
+
+[node name="BottomWall" parent="Node" instance=ExtResource("2_pdfg5")]
+position = Vector2(577, 646)
+rotation = 1.5708
+scale = Vector2(1, 60)
+
+[node name="TopWall" parent="Node" instance=ExtResource("2_pdfg5")]
+position = Vector2(577, 3)
+rotation = 1.5708
+scale = Vector2(1, 60)
+
+[node name="LeftWall" parent="Node" instance=ExtResource("2_pdfg5")]
+position = Vector2(-1, 334)
+scale = Vector2(1, 35)
+
+[node name="RightWall" parent="Node" instance=ExtResource("2_pdfg5")]
+position = Vector2(1154, 334)
+scale = Vector2(1, 35)
+
+[node name="paddleSprite" parent="." instance=ExtResource("3_v1fj0")]
+position = Vector2(58, 326)

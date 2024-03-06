@@ -10,9 +10,9 @@ func _physics_process(delta):
 func player_movement(speed: float) -> void:
 	if Input.is_action_pressed("move_up"):
 		velocity.y = -speed
-		print("up")
+		# print("up")
 	elif Input.is_action_pressed("move_down"):
 		velocity.y = speed
-		print("down")
+		# print("down")
 	else:
 		velocity.y = 0
