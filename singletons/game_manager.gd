@@ -1,10 +1,18 @@
 extends Node
 
 const GROUP_BALL: String = "ball"
-enum OBJECT_KEY {BALL}
+var maximum_score: int = 0
+enum OBJECT_KEY {
+	BALL,
+	BLUE_PADDLE,
+	RED_PADDLE
+	}
 
 const SIMPLE_SCENE = {
-	OBJECT_KEY.BALL : preload("res://ball/ball.tscn")
+	OBJECT_KEY.BALL : preload("res://ball/ball.tscn"),
+	OBJECT_KEY.BLUE_PADDLE : preload("res://blue_paddle/blue_paddle.tscn"),
+	OBJECT_KEY.RED_PADDLE : preload("res://red_paddle/red_paddle.tscn"),
+	
 }
 
 enum PADDLES {
@@ -17,6 +25,10 @@ var POINTS: Dictionary = {
 	PADDLES.RED : 0
 }
 
+var winner = ""
+
+
+
 func set_score(key: PADDLES, value: int) -> void:
 	POINTS[key] = value
 	print(value)
@@ -26,6 +38,24 @@ func get_score(key: PADDLES) -> int:
 	
 func increment_score(key: PADDLES, value: int) -> void:
 	set_score(key, POINTS[key]+value)
+	if POINTS[key] >= maximum_score:
+		set_winner(key)
+		SignalManager.on_game_over.emit()
+
+func set_winner(key: PADDLES) -> void:
+	if key == PADDLES.BLUE:
+		winner= "Blue"
+	else:
+		winner= "Red"
+
+func get_winner() -> String:
+	return winner
+
+func set_maximum_score(value: int) -> void:
+	maximum_score = value
+	
+func get_maximum_score() -> int:
+	return maximum_score
 
 func add_child_deferred(child_to_add) -> void:
 	get_tree().root.add_child(child_to_add)
