@@ -1,34 +1,97 @@
-[gd_scene load_steps=4 format=3 uid="uid://dnxlbprvywja1"]
+[gd_scene load_steps=9 format=3 uid="uid://dnxlbprvywja1"]
 
-[ext_resource type="PackedScene" uid="uid://o0witael17gv" path="res://ball/ball.tscn" id="1_6n3gy"]
-[ext_resource type="PackedScene" uid="uid://n33r8h08yu1m" path="res://levels/wall.tscn" id="2_pdfg5"]
+[ext_resource type="Script" path="res://levels/test_level.gd" id="1_xiesq"]
+[ext_resource type="PackedScene" uid="uid://bs6wa3gx7efgg" path="res://wall/wall.tscn" id="2_3j2bw"]
+[ext_resource type="PackedScene" uid="uid://bamph4v851mbh" path="res://goal/goal_left/goal_left.tscn" id="3_22nx0"]
 [ext_resource type="PackedScene" uid="uid://dv3bek2be5a2i" path="res://blue_paddle/blue_paddle.tscn" id="3_v1fj0"]
+[ext_resource type="PackedScene" uid="uid://b5j2vn4xcrd0w" path="res://goal/goal_right/goal_right.tscn" id="4_863r5"]
+[ext_resource type="PackedScene" uid="uid://x2nxy81a5y4t" path="res://blue_paddle/blue_paddle_static.tscn" id="6_87wwn"]
+
+[sub_resource type="SystemFont" id="SystemFont_q0ipk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_iu01j"]
+font = SubResource("SystemFont_q0ipk")
+font_size = 50
 
 [node name="test_level" type="Node2D"]
 position = Vector2(1, 0)
+script = ExtResource("1_xiesq")
+metadata/_edit_horizontal_guides_ = [43.0]
 
-[node name="ball" parent="." instance=ExtResource("1_6n3gy")]
-position = Vector2(505, 321)
+[node name="WallNodes" type="Node" parent="."]
 
-[node name="Node" type="Node" parent="."]
+[node name="BottomWall" parent="WallNodes" instance=ExtResource("2_3j2bw")]
+position = Vector2(569, 655)
+scale = Vector2(10, 1)
 
-[node name="BottomWall" parent="Node" instance=ExtResource("2_pdfg5")]
-position = Vector2(577, 646)
-rotation = 1.5708
-scale = Vector2(1, 60)
-
-[node name="TopWall" parent="Node" instance=ExtResource("2_pdfg5")]
-position = Vector2(577, 3)
-rotation = 1.5708
-scale = Vector2(1, 60)
-
-[node name="LeftWall" parent="Node" instance=ExtResource("2_pdfg5")]
-position = Vector2(-1, 334)
-scale = Vector2(1, 35)
-
-[node name="RightWall" parent="Node" instance=ExtResource("2_pdfg5")]
-position = Vector2(1154, 334)
-scale = Vector2(1, 35)
+[node name="TopWall" parent="WallNodes" instance=ExtResource("2_3j2bw")]
+position = Vector2(569, -12)
+scale = Vector2(10, 1)
 
 [node name="paddleSprite" parent="." instance=ExtResource("3_v1fj0")]
 position = Vector2(58, 326)
+
+[node name="GoalNodes" type="Node" parent="."]
+
+[node name="GoalLeft" parent="GoalNodes" instance=ExtResource("3_22nx0")]
+position = Vector2(-10, 327)
+scale = Vector2(1, 10)
+
+[node name="GoalRight" parent="GoalNodes" instance=ExtResource("4_863r5")]
+position = Vector2(1160, 327)
+scale = Vector2(1, 10)
+
+[node name="HUD" type="Node" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="HUD"]
+
+[node name="BluePaddleScore" type="Label" parent="HUD/CanvasLayer"]
+offset_right = 58.0
+offset_bottom = 69.0
+text = "00
+"
+label_settings = SubResource("LabelSettings_iu01j")
+horizontal_alignment = 1
+
+[node name="RedPaddleScore" type="Label" parent="HUD/CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -58.0
+offset_bottom = 69.0
+grow_horizontal = 0
+text = "00
+"
+label_settings = SubResource("LabelSettings_iu01j")
+horizontal_alignment = 1
+
+[node name="Countdown" type="Label" parent="HUD/CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -29.0
+offset_top = -34.5
+offset_right = 29.0
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "00
+"
+label_settings = SubResource("LabelSettings_iu01j")
+horizontal_alignment = 1
+
+[node name="BallSpawn" type="Marker2D" parent="."]
+position = Vector2(575, 326)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="BluePaddleStatic" parent="." instance=ExtResource("6_87wwn")]
+position = Vector2(145, 327)
+
+[connection signal="body_entered" from="GoalNodes/GoalLeft" to="." method="_on_goal_left_body_entered"]
+[connection signal="body_entered" from="GoalNodes/GoalRight" to="." method="_on_goal_right_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

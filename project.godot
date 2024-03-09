@@ -14,6 +14,11 @@ config/name="Space Pong"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameManager="*res://singletons/game_manager.gd"
+SignalManager="*res://Singletons/signal_manager.gd"
+
 [display]
 
 window/stretch/mode="canvas_items"

@@ -1,17 +1,16 @@
-extends CharacterBody2D
+extends StaticBody2D
 @export var MOVEMENT_SPEED: float = 400.0
 
 
 func _physics_process(delta):
-	player_movement(MOVEMENT_SPEED)
-	move_and_slide()
+	player_movement(MOVEMENT_SPEED*delta)
 
 func player_movement(speed: float) -> void:
 	if Input.is_action_pressed("move_up"):
-		velocity.y = -speed
+		set_constant_linear_velocity(Vector2(0, -1)*speed)
 		# print("up")
 	elif Input.is_action_pressed("move_down"):
-		velocity.y = speed
+		set_constant_linear_velocity(Vector2(0, 1)*speed)
 		# print("down")
 	else:
-		velocity.y = 0
+		set_constant_linear_velocity(Vector2(0, 0))

@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://djgi8uu87s57h"]
+
+[sub_resource type="GDScript" id="GDScript_4tpog"]
+script/source = "extends Area2D
+
+
+func _on_body_entered(body):
+	if body.is_in_group(GameManager.GROUP_BALL):
+		print(body)
+		GameManager.increment_score(GameManager.PADDLES.BLUE, 1)
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7432d"]
+size = Vector2(20, 66)
+
+[node name="Goal" type="Area2D"]
+script = SubResource("GDScript_4tpog")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7432d")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

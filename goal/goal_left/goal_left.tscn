@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bamph4v851mbh"]
+
+[ext_resource type="PackedScene" uid="uid://djgi8uu87s57h" path="res://goal/goal.tscn" id="1_l62vd"]
+
+[node name="GoalLeft" instance=ExtResource("1_l62vd")]
+script = null
