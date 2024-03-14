@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dke7nx43t00j8"]
+
+[ext_resource type="Script" path="res://red_paddle/red_paddle_static.gd" id="1_56w8p"]
+[ext_resource type="Texture2D" uid="uid://cql5gp1f4oeeb" path="res://assets/redPaddle.png" id="2_lkj2p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a5u5u"]
+size = Vector2(32.5, 128)
+
+[node name="BluePaddleStatic" type="StaticBody2D"]
+script = ExtResource("1_56w8p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2, 0)
+texture = ExtResource("2_lkj2p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.25, 0)
+shape = SubResource("RectangleShape2D_a5u5u")
