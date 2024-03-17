@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var speed: float = 400.0
+@export var acceleration: float = 1.05
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,7 +19,8 @@ func _process(delta):
 	
 	if not collision:
 		return
-	velocity = velocity.bounce(collision.get_normal())
+	velocity = velocity.bounce(collision.get_normal())*acceleration
+	SignalManager.ball_bounce.emit()
 	
 
 func destroy_ball() -> void:

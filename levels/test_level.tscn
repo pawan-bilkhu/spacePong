@@ -17,6 +17,7 @@ font_size = 80
 [node name="test_level" type="Node2D"]
 position = Vector2(1, 0)
 script = ExtResource("1_xiesq")
+particle_speed_scale = 0.5
 metadata/_edit_horizontal_guides_ = [43.0]
 
 [node name="WallNodes" type="Node" parent="."]
@@ -113,8 +114,9 @@ position = Vector2(100, 326)
 [node name="RedSpawn" type="Marker2D" parent="SpriteNodes"]
 position = Vector2(1052, 326)
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="Particles" type="CPUParticles2D" parent="."]
 position = Vector2(576, 0)
+emitting = false
 amount = 50
 lifetime = 3.0
 emission_shape = 3

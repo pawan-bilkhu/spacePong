@@ -12,7 +12,6 @@ const SIMPLE_SCENE = {
 	OBJECT_KEY.BALL : preload("res://ball/ball.tscn"),
 	OBJECT_KEY.BLUE_PADDLE : preload("res://blue_paddle/blue_paddle_static.tscn"),
 	OBJECT_KEY.RED_PADDLE : preload("res://red_paddle/red_paddle_static.tscn"),
-	
 }
 
 enum PADDLES {
